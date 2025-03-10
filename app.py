@@ -69,8 +69,9 @@ def update_user(username, age, height, weight, gender):
     conn.commit()
 
 # Load Dataset
-calories_df = pd.read_csv(r"C:\\Users\\hvsin\\Desktop\\code\\personal_fitness_tracker\\data\\calories.csv")
-exercise_df = pd.read_csv(r"C:\\Users\\hvsin\\Desktop\\code\\personal_fitness_tracker\\data\\exercise.csv")
+calories_df = pd.read_csv("data/calories.csv")
+exercise_df = pd.read_csv("data/exercise.csv")
+
 
 # Merge Data
 exercise_df = exercise_df.merge(calories_df, on="User_ID")
