@@ -69,9 +69,8 @@ def update_user(username, age, height, weight, gender):
     conn.commit()
 
 # Load Dataset
-calories_df = pd.read_csv("calories.csv")
-exercise_df = pd.read_csv("exercise.csv")
-
+calories_df = pd.read_csv(r"C:\\Users\\hvsin\\Desktop\\code\\personal_fitness_tracker\\data\\calories.csv")
+exercise_df = pd.read_csv(r"C:\\Users\\hvsin\\Desktop\\code\\personal_fitness_tracker\\data\\exercise.csv")
 
 # Merge Data
 exercise_df = exercise_df.merge(calories_df, on="User_ID")
@@ -126,21 +125,32 @@ if "user" in st.session_state:
     st.title(f"Hello, {user_data[1]}! 👋")
 
     # Buttons to Show Profile & Past Records
-    show_profile = st.button("📌 View Profile")
     show_past_records = st.button("📊 Display Past Records")
 
     # Profile Section (Only When Clicked)
-    if show_profile:
-        st.header("Your Profile")
-        new_age = st.number_input("Age", 10, 100, value=user_data[3])
-        new_height = st.number_input("Height (cm)", 100.0, 250.0, value=user_data[4])
-        new_weight = st.number_input("Weight (kg)", 30.0, 200.0, value=user_data[5])
-        new_gender = st.selectbox("Gender", ["Male", "Female"], index=0 if user_data[6] == "Male" else 1)
+    # Check if session_state for profile visibility exists, else set default
+    if "show_profile" not in st.session_state:
+        st.session_state["show_profile"] = False
 
-        if st.button("Update Profile"):
+    # Button to toggle profile section with a unique key
+    if st.button("📌 View Profile", key="view_profile_btn"):
+        st.session_state["show_profile"] = not st.session_state["show_profile"]
+
+    # Display profile only if the user clicks the button
+    if st.session_state["show_profile"]:
+        st.header("Your Profile")
+
+        new_age = st.number_input("Age", 10, 100, value=user_data[3], key="age_input")
+        new_height = st.number_input("Height (cm)", 100.0, 250.0, value=user_data[4], key="height_input")
+        new_weight = st.number_input("Weight (kg)", 30.0, 200.0, value=user_data[5], key="weight_input")
+        new_gender = st.selectbox("Gender", ["Male", "Female"], index=0 if user_data[6] == "Male" else 1, key="gender_select")
+
+        # Unique key for update button
+        if st.button("Update Profile", key="update_profile_btn"):
             update_user(user_data[1], new_age, new_height, new_weight, new_gender)
             st.success("✅ Profile updated successfully!")
-            st.rerun()
+            user_data = login_user(user_data[1], user_data[2])  # Refresh user data
+            st.session_state["user"] = user_data  # Update session state
 
     # User Input for Predictions
     st.header("Enter Your Workout Details")
