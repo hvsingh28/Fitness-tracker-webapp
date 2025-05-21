@@ -29,6 +29,9 @@ It is developed using *Python, **Streamlit, and **SQLite, with a **Random Forest
   - pandas, numpy, scikit-learn, matplotlib
   - streamlit, sqlite3, joblib
 
+## Streamlit webapp link 
+[follow this link to access the webapp](https://fitnessbyhvsingh.streamlit.app/)
+
 ## Setup Instructions
 
 1. *Clone the repository*
