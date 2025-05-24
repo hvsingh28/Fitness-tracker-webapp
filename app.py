@@ -12,9 +12,21 @@ st.set_page_config(page_title="Personal Fitness Tracker", layout="wide")
 # Custom CSS
 st.markdown("""
     <style>
+        .stApp {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-image: url("https://cdn.wallpapersafari.com/97/17/C95hyH.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        z-index: -1;
         body { background-color: #f5f5f5; font-family: 'Arial', sans-serif; }
         .stButton > button { background-color: #ff4b4b; color: white; font-size: 18px; padding: 10px; }
         .stTitle { color: #ff4b4b; font-size: 24px; font-weight: bold; }
+            
     </style>
 """, unsafe_allow_html=True)
 
