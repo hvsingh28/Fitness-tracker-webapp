@@ -26,6 +26,11 @@ st.markdown("""
         body { background-color: #f5f5f5; font-family: 'Arial', sans-serif; }
         .stButton > button { background-color: #ff4b4b; color: white; font-size: 18px; padding: 10px; }
         .stTitle { color: #ff4b4b; font-size: 24px; font-weight: bold; }
+         @media only screen and (max-width: 768px) {
+        .background {
+            background-image: url('https://i.pinimg.com/736x/61/b9/fc/61b9fcbc58d3c886e643b786d56fa6aa--johan.jpg');
+        }
+    }    
             
     </style>
 """, unsafe_allow_html=True)
